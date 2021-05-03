@@ -26,12 +26,10 @@ int main()
 
     vtm[m] = 0;
     for(int i = n; i >= 1; i--)
+	for(int j = m; j >= 0; j--)
     {
-		for(int j = m; j >= 0; j--)
-        {
-			if (vtm[j] == 1e9 || j - tm[i - 1] < 0) continue;
-			vtm[j - tm[i - 1]] = min(vtm[j - tm[i - 1]], vtm[j] + i + 1);
-		}
+		if (vtm[j] == 1e9 || j - tm[i - 1] < 0) continue;
+		vtm[j - tm[i - 1]] = min(vtm[j - tm[i - 1]], vtm[j] + i + 1);
 	}
 
     int overtime = tm[n - 1] - tm[n - 2];
