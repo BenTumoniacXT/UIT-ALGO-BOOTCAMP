@@ -1,11 +1,21 @@
-Giải thích bài VW04p - Checkout:
+------- Giải thích bài VW04p - Checkout: -------
 
----- Coming soon ----
+Bài này yêu cầu việc vận dụng và tính toán công thức vận tốc gia tốc để giải phương trình nhằm tìm ra thời gian thấp nhất. Giải pháp làm bài của em là tìm công thức tính ra quãng đường, sau đó viết ra công thức hoàn chỉnh theo yêu cầu bài. Cuối cùng từ công thức này ta biến đổi phương trình và ra kết quả từ chúng.
 
-Giải thích bài VW05p - Enrichement:
+Lưu ý là bài dễ sai do quá trình làm tròn.
 
----- Coming soon ----
+------- Giải thích bài VW05p - Enrichement: -------
 
-Giải thích bài VW07p - Vitamin:
+Ở bài này phương pháp em làm là sử dụng mảng cộng dồn 3 ô liền kề ở trước, từ đó em sẽ tạo thêm một mảng 2 chiều với b[i][j] = a[i][j] + a[i][j - 1] + a[i][j - 1] (Do công thức tính nên j sẽ xuất phát từ 2 thay vì 0). Cuối cùng em tìm b[i][j] + b[i - 1][j] + b[i - 2][j] (i, j sẽ xuất phát từ 2 với lý do tương tự như trên) nhỏ nhất và đó sẽ là kết quả cuối cùng của bài.
 
----- Coming soon ----
+------- Giải thích bài VW07p - Vitamin: -------
+
+Notes: Thuật toán bài này em tham khảo của Huy Hoàng, em xin phép được trình bày chi tiết. Đồng thời thứ tự trong code có thể khác so với trong Note do cách cài đặt.
+
+Gọi b là dãy chứa m số với b[i] là số giờ ít nhất để đưa từ m Vitamin xuống còn i Vitamin cần phải sản xuẩt, và b[0] là số giờ ít nhất để sản xuất m Vitamin (nói đơn giản ra là sản xuất cho xong yêu cầu), nếu b[0] không hợp lệ, bài toán coi như thất bại. Ta khởi tạo mảng này cho các giá trị bằng số rất to (ở đây em để là 1e7), riêng b[m] = 0 (Vì cần gì thời gian để đưa m vitamin về m vitamin).
+
+Đầu tiên ta tạo một mảng cộng dồn từ dãy a (Dãy chứa các Vitamin được tạo ra theo số giờ hoạt động của máy), đồng thời lưu last = a[n] - a[n - 1] (sẽ giải thích ở gần cuối bài). Sau đó ta xét từ n đến 1 (gọi đây là i), đồng thời trong lúc đó xét từ m đến 0 (gọi đây là j) kiểm tra xem nó có hợp lệ không (Điều kiện hợp lệ là b[i] phải khác số khởi tạo tức là phải có cách đưa từ m về j vitamin và hiệu của j và a[i] phải >= 0 (tức số vitamin sản xuất ra sau i giờ hoạt động phải bé hơn hoặc bằng j, nếu không bài toán sẽ có vấn đề)). Nếu có thì kiểm tra xem liệu kết quả mới là tại b[j - a[i]] vitamin đó đã là số giờ nhỏ nhất chưa, nếu kết quả vừa tính là số giờ từ j vitamin cộng thêm i giờ và cộng thêm 1 nhỏ hơn nó (do tính đây coi như là đã tắt máy sau i giờ chạy) thì thay thế kết quả đó.
+
+Tiếp theo, ta sẽ thử tối ưu xem liệu nếu cho chạy quá giờ thì nó sẽ sản xuất đủ vitamin không, và nếu có liệu nó có nhanh hơn cách trước đó không. Nếu như j vitamin (j từ m đến 0) này sau khi cho chạy hết n giờ, số lượng vitamin yêu cầu còn lại chia hết cho last như đã nói trên thì ta kiểm tra xem liệu thời gian đó có thay thế được với cách trước không.
+
+Cuối cùng output sẽ là b[0] nếu hợp lệ, nếu không thì -1.
